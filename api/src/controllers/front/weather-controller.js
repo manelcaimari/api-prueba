@@ -1,25 +1,21 @@
-const sequelizeDb = require('../models')
+const sequelizeDb = require('../../models')
 const Weather = sequelizeDb.Weather
 const Op = sequelizeDb.Sequelize.Op
 
 exports.create = (req, res) => {
-  const { temperature, wind, description } = req.body
-
-  Weather.create({ temperature, wind, description })
-    .then(data => {
-      res.status(201).send(data)
-    })
-    .catch(err => {
-      if (err.errors) {
-        res.status(422).send({
-          message: err.errors
-        })
-      } else {
-        res.status(500).send({
-          message: 'Algún error ha surgido al insertar el dato.'
-        })
-      }
-    })
+  Weather.create(req.body).then(async data => {
+    res.status(200).send(data)
+  }).catch(err => {
+    if (err.errors) {
+      res.status(422).send({
+        message: err.errors
+      })
+    } else {
+      res.status(500).send({
+        message: 'Algún error ha surgido al insertar el dato.'
+      })
+    }
+  })
 }
 exports.findAll = (req, res) => {
   const page = req.query.page || 1

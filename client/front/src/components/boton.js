@@ -20,7 +20,7 @@ class Boton extends HTMLElement {
       const data = await response.json()
       console.log(data)
 
-      const response2 = await fetch('/saveWeatherData', {
+      const response2 = await fetch('/api/front/weather/routes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -34,6 +34,24 @@ class Boton extends HTMLElement {
     } catch (error) {
       console.error('Error al obtener o enviar datos:', error)
       alert('Error al obtener o enviar datos')
+    }
+  }
+
+  async getRoutes () {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/front/weather/routes`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('customerAccessToken')
+      }
+    })
+
+    if (response.ok) {
+      this.routes = await response.json()
+    } else {
+      const data = await response.json()
+
+      if (data.redirection) {
+        window.location.href = data.redirection
+      }
     }
   }
 

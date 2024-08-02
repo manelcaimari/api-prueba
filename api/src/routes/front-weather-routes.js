@@ -4,9 +4,5 @@ module.exports = (app) => {
 
   router.post('/', controller.create)
 
-  router.get('/', controller.findAll)
-
-  router.get('/:id', controller.findOne)
-
-  app.use('/api/front/weather', router)
+  app.use('/api/front/weather/routes', router)
 }
