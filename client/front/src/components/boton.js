@@ -37,23 +37,7 @@ class Boton extends HTMLElement {
     }
   }
 
-  async getRoutes () {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/front/weather/routes`, {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('customerAccessToken')
-      }
-    })
-
-    if (response.ok) {
-      this.routes = await response.json()
-    } else {
-      const data = await response.json()
-
-      if (data.redirection) {
-        window.location.href = data.redirection
-      }
-    }
-  }
+ 
 
   render () {
     this.shadowRoot.innerHTML = /* html */`
