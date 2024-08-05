@@ -1,4 +1,4 @@
-class Boton extends HTMLElement {
+class Weather extends HTMLElement {
   constructor () {
     super()
     this.attachShadow({ mode: 'open' })
@@ -37,8 +37,6 @@ class Boton extends HTMLElement {
     }
   }
 
- 
-
   render () {
     this.shadowRoot.innerHTML = /* html */`
       <style>
@@ -65,4 +63,4 @@ class Boton extends HTMLElement {
   }
 }
 
-customElements.define('boton-component', Boton)
+customElements.define('weather-component', Weather)
